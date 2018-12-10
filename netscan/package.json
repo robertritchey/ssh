@@ -1,0 +1,22 @@
+{
+    "name": "netscan",
+    "version": "0.0.1",
+    "scripts": {},
+    "private": true,
+    "dependencies": {
+        "arpscan": "^0.6.0",
+        "eslint": "^5.9.0",
+        "net-scan": "^0.1.1",
+        "net-snmp": "^1.2.4",
+        "node-dig-dns": "^0.2.9",
+        "node-nmap": "^4.0.0",
+        "systeminformation": "^3.47.0",
+        "nslookup": "^1.1.1"
+    },
+    "devDependencies": {
+        "babel-preset-env": "^1.7.0",
+        "babel-register": "^6.26.0",
+        "babel-cli": "^6.26.0",
+        "babel-preset-stage-0": "^6.24.1"
+    }
+}

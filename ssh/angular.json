@@ -1,0 +1,39 @@
+// # Start an interactive shell session
+// ```js
+var cidrRange = require('cidr-range');
+var Client = require('ssh2').Client;
+
+var host = cidrRange('10.182.64.1/21')
+var retData
+host.array.forEach(element => {
+  retData = MakeConnect(element)
+});
+
+
+function MakeConnect(host){
+  var conn = new Client();
+  conn.on('ready', function() {
+    console.log('Client :: ready');
+    conn.shell(function(err, stream) {
+      if (err) throw err;
+      stream.on('close', function() {
+        console.log('Stream :: close');
+        conn.end();
+      }).on('data', function(data) {
+          //data variable contains all SMBIOS info from Linux system
+          smBiosData = data;
+        console.log('STDOUT: ' + data);
+      }).stderr.on('data', function(data) {
+        console.log('STDERR: ' + data);
+      });
+      stream.end('dmidecode\nexit\n');
+    });
+  }).connect({
+    host: host,
+    port: 22,
+    username: 'root',
+    password: 'Wevalid8'
+  //   privateKey: require('fs').readFileSync('/root/.ssh/id_rsa.pub')
+  });
+  return smBiosData
+}
